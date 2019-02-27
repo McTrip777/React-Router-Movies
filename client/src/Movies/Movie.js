@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 export default class Movie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movie: null
+      movies: this.props.movie
     };
   }
 
   componentDidMount() {
     // change this line to grab the id passed on the URL
-    const id = 1;
-    this.fetchMovie(id);
+    const id = this.props.match.params.id;
+    this.props.id;
   }
 
-  fetchMovie = id => {
-    axios
-      .get(`http://localhost:5000/api/movies/${id}`)
-      .then(response => {
-        this.setState(() => ({ movie: response.data }));
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
+  // fetchMovie = id => {
+  //   axios
+  //     .get(`http://localhost:5000/api/movies/${id}`)
+  //     .then(response => {
+  //       this.setState(() => ({ movie: response.data }));
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // };
   // Uncomment this code when you're ready for the stretch problems
   // componentWillReceiveProps(newProps){
   //   if(this.props.match.params.id !== newProps.match.params.id){
@@ -38,7 +37,7 @@ export default class Movie extends Component {
   // }
 
   render() {
-    if (!this.state.movie) {
+    if (!this.props.movie) {
       return <div>Loading movie information...</div>;
     }
 
